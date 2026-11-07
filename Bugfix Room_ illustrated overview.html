@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bugfix Room: illustrated overview</title>
+<style>
+:root{--bg:#0f1220;--fg:#f2f4ff;--mut:#9aa3c7;--acc:#7c6cff;--ok:#38d39f;--warn:#ffb454;--card:#1a1f38;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f5ff;--fg:#14172b;--mut:#5a6180;--card:#ffffff}}
+*{box-sizing:border-box}html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow:hidden}
+#stage{position:relative;height:100%;max-width:1100px;margin:0 auto}
+.scene{position:absolute;inset:0 0 90px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:24px;text-align:center;opacity:0;pointer-events:none;transition:opacity .5s}
+.scene.on{opacity:1}
+h1{font-size:clamp(28px,5vw,52px);margin:0}h2{font-size:clamp(22px,3.6vw,38px);margin:0}
+.tag{color:var(--mut);font-size:clamp(14px,2vw,20px)}
+.pill{background:var(--card);border:1px solid var(--acc);border-radius:14px;padding:12px 18px;font-size:clamp(14px,2vw,20px)}
+.on .pop{animation:pop .6s both}
+@keyframes pop{from{opacity:0;transform:translateY(18px) scale(.95)}to{opacity:1;transform:none}}
+.d1{animation-delay:.3s!important}.d2{animation-delay:1.4s!important}.d3{animation-delay:2.6s!important}.d4{animation-delay:3.8s!important}.d5{animation-delay:5s!important}
+.chat{display:flex;flex-direction:column;gap:12px;width:min(520px,90%)}
+.b{background:var(--card);border-radius:16px;padding:12px 16px;text-align:left;max-width:85%}
+.b.me{align-self:flex-end;background:var(--acc);color:#fff}
+.row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px}
+.arr{font-size:26px;color:var(--acc)}
+.warn{border-color:var(--warn);color:var(--warn)}.ok{border-color:var(--ok)}
+.list{display:flex;flex-direction:column;gap:12px;text-align:left}
+#cap{position:absolute;left:0;right:0;bottom:22px;height:60px;padding:0 24px;text-align:center;font-size:clamp(14px,1.9vw,20px);color:var(--mut);display:flex;align-items:center;justify-content:center}
+#bar{position:fixed;left:0;top:0;height:5px;background:var(--acc);width:0}
+#start{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:9;text-align:center;padding:24px}
+button{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:14px 28px;font-size:18px;cursor:pointer}
+</style></head><body>
+<div id="bar"></div>
+<div id="start"><h1>Bugfix Room</h1><div class="tag">Illustrated overview · about 2.5 min<br>Press Win + G to start recording, then click Play.</div><button id="go">Play</button></div>
+<div id="stage">
+<section class="scene"><h1 class="pop">Bugfix Room</h1><div class="pop d2 tag">Team DevDope · built with Switch · illustrated overview</div><div class="row"><span class="pill pop d3">Telegram</span><span class="pill pop d4">Switch</span><span class="pill pop d5">OpenCode</span></div></section>
+<section class="scene"><h2 class="pop">The problem: bugs wait in chat</h2><div class="chat"><div class="b pop d1">Checkout page is broken since morning</div><div class="b pop d2">Anyone looking at it?</div><div class="b pop d3">Still unfixed…</div></div><div class="tag pop d4">Triage eats dev time</div></section>
+<section class="scene"><h2 class="pop">Telegram group → Switch room → agent</h2><div class="row"><span class="pill pop d1">Telegram group</span><span class="arr pop d2">→</span><span class="pill pop d3">Switch room</span><span class="arr pop d4">→</span><span class="pill pop d5">OpenCode agent</span></div><div class="tag pop d5">Working inside a Spring Boot project</div></section>
+<section class="scene"><h2 class="pop">The intended workflow</h2><div class="list"><div class="pill pop d1">1. Teammate reports a bug and @mentions the agent</div><div class="pill pop d2">2. Agent reads the code and explains the root cause</div><div class="pill pop d3">3. Agent proposes a fix</div><div class="pill pop d4 ok">4. A human replies “approved”, then the fix is applied</div></div></section>
+<section class="scene"><h1 class="pop">Agent proposes.<br>Human approves.</h1><div class="tag pop d2">Fast, but in control</div></section>
+<section class="scene"><h2 class="pop">What was actually built</h2><div class="list"><div class="pill ok pop d1">✓ Switch Console and local server running</div><div class="pill ok pop d2">✓ Telegram bot connected, group linked to a room</div><div class="pill ok pop d3">✓ OpenCode agent created and invited to the room</div><div class="pill warn pop d4">! Full fix loop not run live: model quota error, shown as an illustration</div></div></section>
+<section class="scene"><h2 class="pop">Everything is in the README</h2><div class="pill pop d2">github.com/YOUR-USERNAME/YOUR-REPO</div><div class="tag pop d3">Thanks for watching</div></section>
+</div>
+<div id="cap"></div>
+<script>
+var D=[15,20,25,35,20,25,10],C=[
+"Hi, I’m Hemakshi from team DevDope. This is Bugfix Room, built with Switch for the Flip the Switch Hackathon.",
+"Small teams lose time on bugs. Someone reports one in chat, someone digs through the code, and the fix waits.",
+"With Switch, a Telegram group becomes a room. An AI coding agent, OpenCode, joins it as a named teammate and works inside our Spring Boot project.",
+"A teammate reports a bug. The agent reads the code, explains the cause and proposes a fix. Nothing changes until a person in the room replies approved.",
+"The rule is simple: the agent proposes, a human approves.",
+"Here is what I built and ran: Switch Console, the Telegram bot, the room and the agent joining it. The agent hit a free-tier model quota error, so the full fix loop is shown here as an illustration, not a live run.",
+"Everything is in the README. Thanks for watching."];
+var S=document.querySelectorAll(".scene"),cap=document.getElementById("cap"),bar=document.getElementById("bar");
+var total=D.reduce(function(a,b){return a+b},0);
+function show(i){S.forEach(function(s,k){s.classList.remove("on");if(k===i){void s.offsetWidth;s.classList.add("on")}});cap.textContent=C[i]}
+document.getElementById("go").onclick=function(){
+document.getElementById("start").style.display="none";
+var i=0,t0=Date.now();show(0);
+bar.style.transition="width "+total+"s linear";bar.style.width="100%";
+(function next(){setTimeout(function(){i++;if(i<S.length){show(i);next()}},D[i]*1000)})();
+};
+</script></body></html>
